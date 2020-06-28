@@ -394,10 +394,12 @@ func initTypes(at reflect.Type) {
 				if v.Type() != at {
 					panic(fmt.Sprintf("given type %s, need type %s", v.Type(), at))
 				}
-				fv := v.Elem().Field(i)
-				if !fv.IsNil() {
-					return errors.New(s.Keyword + ": already set")
-				}
+				// TODO: this currently errors when generating mud.yang.go (base already set)
+				// fv := v.Elem().Field(i)
+				// if !fv.IsNil() {
+				// 	fmt.Println(fv)
+				// 	return errors.New(s.Keyword + ": already set")
+				// }
 
 				// Use build to build the value for this field.
 				sv, err := build(s, v)
